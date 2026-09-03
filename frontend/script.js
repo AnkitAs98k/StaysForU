@@ -2,8 +2,8 @@
 // FASTAPI CONNECTION
 // ========================================
 
-const API_URL = "https://staysforu-4.onrender.com";
 
+const API_URL = "https://staysforu-4.onrender.com/predict";
 
 // ========================================
 // GET ELEMENTS
