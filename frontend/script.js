@@ -2,7 +2,7 @@
 // FASTAPI CONNECTION
 // ========================================
 
-const API_URL = "https://staysforu-2.onrender.com";
+const API_URL = "https://staysforu-4.onrender.com";
 
 
 // ========================================
