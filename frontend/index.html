@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NYC Airbnb Room Type Predictor</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- Background -->
+        <div class="city-glow"></div>
+
+        <!-- HEADER -->
+        <header class="hero">
+
+            <div class="eyebrow">
+                NYC AIRBNB <span>•</span> ROOM TYPE PREDICTOR
+            </div>
+
+            <h1>
+                What kind of stay<br>
+                is this listing?
+            </h1>
+
+            <p>
+                Enter a listing's details and the model will predict whether
+                it's an entire home, a private room, or a shared room —
+                the way the city lights up differently behind each kind of door.
+            </p>
+
+        </header>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="dashboard">
+
+            <!-- ============================= -->
+            <!-- LEFT CARD - LISTING DETAILS -->
+            <!-- ============================= -->
+
+            <section class="card listing-card">
+
+                <div class="card-header">
+
+                    <h2>Listing details</h2>
+
+                    <button
+                        type="button"
+                        class="example-btn"
+                        id="exampleBtn">
+                        💡 Try an example
+                    </button>
+
+                </div>
+
+
+                <form id="predictionForm">
+
+
+                    <!-- LOCATION -->
+
+                    <div class="section">
+
+                        <div class="section-title">
+                            LOCATION
+                        </div>
+
+
+                        <div class="input-grid">
+
+                            <div class="input-group">
+
+                                <label for="latitude">
+                                    Latitude
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="latitude"
+                                    step="any"
+                                    placeholder="40.7128"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="input-group">
+
+                                <label for="longitude">
+                                    Longitude
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="longitude"
+                                    step="any"
+                                    placeholder="-74.0060"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="input-group">
+
+                                <label for="neighbourhood_group">
+                                    Borough
+                                </label>
+
+                                <select
+                                    id="neighbourhood_group"
+                                    required>
+
+                                    <option value="">
+                                        Select borough
+                                    </option>
+
+                                    <option value="Bronx">
+                                        Bronx
+                                    </option>
+
+                                    <option value="Brooklyn">
+                                        Brooklyn
+                                    </option>
+
+                                    <option value="Manhattan">
+                                        Manhattan
+                                    </option>
+
+                                    <option value="Queens">
+                                        Queens
+                                    </option>
+
+                                    <option value="Staten Island">
+                                        Staten Island
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="input-group">
+
+                                <label for="neighbourhood">
+                                    Neighbourhood
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="neighbourhood"
+                                    placeholder="Williamsburg"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PRICING -->
+
+                    <div class="section">
+
+                        <div class="section-title">
+                            PRICING & STAY
+                        </div>
+
+
+                        <div class="input-grid">
+
+                            <div class="input-group">
+
+                                <label for="price">
+                                    Price per night (USD)
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="price"
+                                    min="0.01"
+                                    step="any"
+                                    placeholder="150"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="input-group">
+
+                                <label for="minimum_nights">
+                                    Minimum nights
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="minimum_nights"
+                                    min="1"
+                                    max="365"
+                                    placeholder="1"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="slider-container">
+
+                            <label for="availability_365">
+                                Days available per year
+                            </label>
+
+                            <input
+                                type="range"
+                                id="availability_365"
+                                min="0"
+                                max="365"
+                                value="365"
+                            >
+
+                            <div class="slider-value">
+                                <strong id="availabilityValue">
+                                    365
+                                </strong>
+
+                                <span>/ 365 days</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- REVIEWS & HOST -->
+
+                    <div class="section">
+
+                        <div class="section-title">
+                            REVIEWS & HOST
+                        </div>
+
+
+                        <div class="input-grid">
+
+                            <div class="input-group">
+
+                                <label for="number_of_reviews">
+                                    Total reviews
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="number_of_reviews"
+                                    min="0"
+                                    placeholder="25"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="input-group">
+
+                                <label for="reviews_per_month">
+                                    Reviews per month
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="reviews_per_month"
+                                    min="0"
+                                    step="any"
+                                    placeholder="2.5"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="input-group full">
+
+                            <label for="calculated_host_listings_count">
+                                Listings by this host
+                            </label>
+
+                            <input
+                                type="number"
+                                id="calculated_host_listings_count"
+                                min="0"
+                                placeholder="1"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PREDICT BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="predict-btn"
+                        id="predictButton">
+
+                        <span>⌁</span>
+
+                        Predict room type
+
+                    </button>
+
+
+                </form>
+
+            </section>
+
+
+
+            <!-- ============================= -->
+            <!-- RIGHT CARD - PREDICTION -->
+            <!-- ============================= -->
+
+            <section class="card prediction-card">
+
+
+                <div class="card-header">
+
+                    <h2>Prediction</h2>
+
+                    <div class="connection">
+
+                        <span class="status-dot"></span>
+
+                        <span>Connected</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- INITIAL GRAPH -->
+
+                <div
+                    id="emptyPrediction"
+                    class="empty-prediction">
+
+                    <div class="city-bars">
+
+                        <div class="bar bar-small"></div>
+
+                        <div class="bar bar-large"></div>
+
+                        <div class="bar bar-medium"></div>
+
+                    </div>
+
+                    <p>
+                        Fill in the listing details and predict
+                        to see the city light up.
+                    </p>
+
+                </div>
+
+
+
+                <!-- RESULTS -->
+
+                <div
+                    id="predictionResult"
+                    class="prediction-result hidden">
+
+
+                    <div class="most-likely">
+                        MOST LIKELY
+                    </div>
+
+
+                    <div
+                        id="predictedRoom"
+                        class="predicted-room">
+
+                        Private room
+
+                    </div>
+
+
+
+                    <!-- PROBABILITIES -->
+
+                    <div class="probability-box">
+
+                        <div class="probability-row">
+
+                            <div class="probability-name">
+                                Private room
+                            </div>
+
+                            <div class="probability-track">
+
+                                <div
+                                    id="privateBar"
+                                    class="probability-fill private">
+                                </div>
+
+                            </div>
+
+                            <div
+                                id="privatePercent"
+                                class="percentage">
+
+                                0%
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="probability-row">
+
+                            <div class="probability-name">
+                                Entire home/apt
+                            </div>
+
+                            <div class="probability-track">
+
+                                <div
+                                    id="entireBar"
+                                    class="probability-fill entire">
+                                </div>
+
+                            </div>
+
+                            <div
+                                id="entirePercent"
+                                class="percentage">
+
+                                0%
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="probability-row">
+
+                            <div class="probability-name">
+                                Shared room
+                            </div>
+
+                            <div class="probability-track">
+
+                                <div
+                                    id="sharedBar"
+                                    class="probability-fill shared">
+                                </div>
+
+                            </div>
+
+                            <div
+                                id="sharedPercent"
+                                class="percentage">
+
+                                0%
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- INFO -->
+
+                    <div class="info-box">
+
+                        <div class="info-icon">
+                            i
+                        </div>
+
+                        <p>
+                            Probabilities represent the model's
+                            confidence based on the listing details
+                            provided.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LOADING -->
+
+                <div
+                    id="loading"
+                    class="loading hidden">
+
+                    <div class="spinner"></div>
+
+                    <p>
+                        Analyzing listing...
+                    </p>
+
+                </div>
+
+
+                <!-- ERROR -->
+
+                <div
+                    id="errorBox"
+                    class="error-box hidden">
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+
+        <!-- FOOTER -->
+
+        <footer>
+
+            ♡ Built with FastAPI, scikit-learn & lots of ☕
+
+        </footer>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

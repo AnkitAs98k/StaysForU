@@ -1,0 +1,28 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+venv/
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Model files / large binaries
+*.pkl
+*.h5
+*.joblib
+
+# Node frontend build artifacts (if using React/Vue/etc.)
+frontend/node_modules/
+frontend/dist/
+
+# IDE settings
+.vscode/
+.idea/
